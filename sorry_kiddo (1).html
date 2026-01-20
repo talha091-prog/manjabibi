@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorry Kiddo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: float 10s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .content {
+            max-width: 600px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn.active {
+            background: #ff6b6b;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
+            transform: scale(1.05);
+        }
+
+        .toggles {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .toggle-label {
+            font-size: 1.1rem;
+        }
+
+        .toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .toggle.active {
+            background: #4ecdc4;
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.8);
+        }
+
+        .toggle.active::before {
+            transform: translateX(30px);
+        }
+
+        .emoji-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            z-index: 1000;
+            animation: pop 0.5s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes pop {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .note {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            .content {
+                padding: 20px;
+            }
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sorry Kiddo</h1>
+        <p>How Long You Gonna Keep Hating on Me?</p>
+    </header>
+
+    <main>
+        <div class="content">
+            <h2>Let's Settle This</h2>
+            <p>Click the buttons and toggles below to express yourself.</p>
+
+            <div class="buttons">
+                <button class="btn" id="hate-btn">Keep Hating</button>
+                <button class="btn" id="forgive-btn">Forgive Me</button>
+                <button class="btn" id="laugh-btn">Just Laugh</button>
+            </div>
+
+            <div class="toggles">
+                <div class="toggle-container">
+                    <span class="toggle-label">Hate Mode</span>
+                    <div class="toggle" id="hate-toggle"></div>
+                </div>
+                <div class="toggle-container">
+                    <span class="toggle-label">Forgive Mode</span>
+                    <div class="toggle" id="forgive-toggle"></div>
+                </div>
+            </div>
+
+            <div class="note">
+                <p>I'm truly sorry—can we move forward together?</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showEmoji(emoji) {
+            const popup = document.createElement('div');
+            popup.className = 'emoji-popup';
+            popup.textContent = emoji;
+            document.body.appendChild(popup);
+            setTimeout(() => document.body.removeChild(popup), 1000);
+        }
+
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                let emoji = btn.id === 'hate-btn' ? '😠' : btn.id === 'forgive-btn' ? '❤️' : '😂';
+                showEmoji(emoji);
+                setTimeout(() => btn.classList.remove('active'), 2000);
+            });
+        });
+
+        const toggles = document.querySelectorAll('.toggle');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                toggle.classList.toggle('active');
+                let emoji = toggle.id === 'hate-toggle'
+                    ? (toggle.classList.contains('active') ? '😤' : '😌')
+                    : (toggle.classList.contains('active') ? '😍' : '😔');
+                showEmoji(emoji);
+            });
+        });
+    </script>
+</body>
+</html>
